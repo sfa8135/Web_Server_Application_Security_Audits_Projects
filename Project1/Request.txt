@@ -1,4 +1,0 @@
-BREW /pot-0/green HTCPCP-TEA/1.0 
-Content-Type:message/teapot
-Accept-Addition:milk
-
