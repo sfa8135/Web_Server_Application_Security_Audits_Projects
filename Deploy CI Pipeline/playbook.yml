@@ -1,0 +1,113 @@
+
+---
+- name: Sample ansible
+  hosts: Linux
+  remote_user: sumayyah
+  tasks:
+
+
+    - name: install docker
+      shell: apt-get install docker docker.io -y
+      become: yes
+
+    - name: install pip
+      become: yes
+      shell: sudo apt install -y python-pip  
+
+    - name: install docker-py
+      become: yes
+      shell: sudo pip install docker-py
+
+    - name: log into docker
+      become: yes
+      docker_login:
+        username: alahmadi
+        password: 123123
+
+    - name: pull ubuntu image
+      become: yes
+      docker_image:
+         name: ubuntu:18.04
+
+    - name: copy docker file
+      become: yes
+      copy:
+        src: /home/Dockerfile
+        dest: /etc/docker/Dockerfile
+        owner: sumayyah
+        group: sumayyah
+        mode: 0644
+
+    - name: copy vuln.php file
+      become: yes
+      copy:
+        src: /home/vuln.php
+        dest: /etc/docker/vuln.php
+        owner: sumayyah
+        group: sumayyah
+        mode: 0644
+
+    - name: copy apache2.conf file
+      become: yes
+      copy:
+        src: /home/apache2.conf
+        dest: /etc/docker/apache2.conf
+        owner: sumayyah
+        group: sumayyah
+        mode: 0644
+
+    - name: copy security.conf file
+      become: yes
+      copy:
+        src: /home/security.conf
+        dest: /etc/docker/security.conf
+        owner: sumayyah
+        group: sumayyah
+        mode: 0644
+
+    - name: copy mysite.conf file
+      become: yes
+      copy:
+        src: /home/mysite.conf
+        dest: /etc/docker/mysite.conf
+        owner: sumayyah
+        group: sumayyah
+        mode: 0644
+
+
+    - name: build custome image
+      become: yes
+      docker_image:
+         path: /etc/docker
+         name: customimage
+
+
+    - name: first container
+      become: yes
+      docker_container:
+         name: container1
+         image: customimage
+         state: started
+         ports:
+         - "8080:80"
+         - "8443:443"
+         tty: true
+
+
+    - name: pull modsec image
+      become: yes
+      docker_image:
+         name: owasp/modsecurity-crs
+    
+
+    - name: second container
+      become: yes
+      docker_container:
+         name: container2
+         image: owasp/modsecurity-crs
+         state: started
+         ports:
+         - "7777:8080"
+
+
+
