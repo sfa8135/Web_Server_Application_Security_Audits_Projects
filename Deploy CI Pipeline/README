@@ -1,0 +1,15 @@
+This folder contains the following file:
+1. Playbook.yml
+2. Dockerfile
+3. Vuln.php
+4. Apache2.conf.    
+5. Security.conf
+6. mysite.conf
+
+Note: Apache2 and security files are created with the security setting modified (disable directory listing, ServerTockens/ServerSignature and load ssl module for https ) to replaced the original files. 
+
+Steps to execute the playbook properly: 
+1- On the node machine, install openssh, python and pip 
+2- Save the remining files (Dockerfile, vuln.php, apache2.conf and security.conf) in the admin machine to transfer it to the node machine 
+3- Make sure to change the path of Dockerfile and vuln.php in the playbook based on where you saved them in your machine
+4- you should also have hosts file that contain the IP to the node machine 
