@@ -1,0 +1,16 @@
+The aim of this parser is to understand how HTTP are constructed and what HTTP servers must do to validate the structure of an HTTP request.
+
+
+HTCPCP-TEA is not suitable for use in production, but it is useful for becoming familiar with HTTP since it requires the use of most HTTP components.
+
+The project content of writing a parser which determines whether HTCPCP-TEA requests are valid and generate appropriate HTCPCP-TEA response. 
+It's consult both RFC documents to determine how HTCPCP-TEA requests and responses should be constructed.
+
+This folder has a source code written in python and doesn’t need any dependencies 
+And a txt file (HTCPCP-TEA request) which can be a command-line argument for the code 
+To compile the file you need to have IDE that support python
+To execute the file you need to install python 
+
+
+
+
